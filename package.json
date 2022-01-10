@@ -1,0 +1,14 @@
+{
+  "name": "docker",
+  "scripts": {
+    "run devserver": "docker compose up -d mysql php nginx",
+    "stop devserver": "docker compose stop",
+    "remove devserver": "docker compose down",
+    "recreate devserver": "docker compose up -d --build mysql php nginx",
+    "remove old images": "docker rmi $(docker images -qa -f 'dangling=true')",
+    "rebuild php image": "docker compose build --parallel --compress php",
+    "rebuild nginx image": "docker compose build --parallel --compress nginx",
+    "rebuild mysql image": "docker compose build --parallel --compress mysql",
+    "beckup db": "docker exec $container_name /usr/bin/mysqldump -u root --password=root $db_name > /home/semnix/backup/$db_name.sql"
+  }
+}

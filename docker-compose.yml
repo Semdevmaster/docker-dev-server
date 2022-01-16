@@ -7,6 +7,7 @@ services:
         - NGINX_VERSION=${NGINX_VERSION}
       dockerfile: Dockerfile
     image: nginx:devserver
+    container_name: ${APP_HOST}-nginx
     volumes:
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
@@ -40,6 +41,7 @@ services:
       context: ./nodejs
       dockerfile: Dockerfile
     image: nodejs:devserver
+    container_name: ${APP_HOST}-nodejs
     volumes:
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
     restart: unless-stopped
@@ -98,6 +100,7 @@ services:
         - PGID=${PHP_FPM_PGID}
         - LOCALE=${PHP_FPM_DEFAULT_LOCALE}
     image: php${PHP_VERSION}:devserver
+    container_name: ${APP_HOST}-php
     restart: unless-stopped
     tty: true
     user: www-data
@@ -121,6 +124,7 @@ services:
       args:
         - MYSQL_VERSION=${MYSQL_VERSION}
     image: mysql${MYSQL_VERSION}:devserver
+    container_name: ${APP_HOST}-mysql
     restart: unless-stopped
     tty: true
     environment:

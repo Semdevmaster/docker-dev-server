@@ -233,10 +233,12 @@ RUN set -eux; \
 ###########################################################################
 
 ARG INSTALL_PCNTL=false
+
 RUN if [ ${INSTALL_PCNTL} = true ]; then \
     # Installs pcntl, helpful for running Horizon
     docker-php-ext-install pcntl \
 ;fi
+
 ###########################################################################
 # bcmath:
 ###########################################################################
